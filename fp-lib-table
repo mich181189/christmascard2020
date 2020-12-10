@@ -1,0 +1,4 @@
+(fp_lib_table
+  (lib (name Tag-Connect)(type Legacy)(uri ${KIPRJMOD}/Tag-Connect.mod)(options "")(descr ""))
+  (lib (name christmas-card)(type KiCad)(uri /home/michael/src/christmas-card)(options "")(descr ""))
+)

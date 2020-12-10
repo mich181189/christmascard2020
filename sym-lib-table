@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name Tag-Connect)(type Legacy)(uri ${KIPRJMOD}/Tag-Connect.lib)(options "")(descr ""))
+  (lib (name USB-B-S-X-X-TH)(type Legacy)(uri ${KIPRJMOD}/USB-B-S-X-X-TH.lib)(options "")(descr ""))
+)
