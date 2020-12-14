@@ -1,0 +1,31 @@
+lm75 Module
+===========
+.. py:module::lm75
+
+Handler for LM75 i2c temperature sensor. The LM75 temperature sensor is connected to the I2C bus, and continuously measures temperature, unless it is explicitly shutdown (see :py:meth:`lm75.LM75.shutdown`)
+
+.. py:module:: lm75
+.. py:class:: LM75(i2c [, address=72])
+
+	Constructs an LM75 object. Takes an I2C object and optionally, an address of the LM75
+
+
+	.. py:method:: get_temperature()
+
+	Gets the current temperature, as measured by the LM75 module, in `degrees celsius <https://en.wikipedia.org/wiki/Celsius>`_
+
+	Reading while the device is shutdown will result in the last temperature reading captured before the sensor was shutdown.
+
+	.. py:method:: shutdown()
+
+	Shuts down the LM75 temperature sensor, reducing current consumption. Also might be useful to prevent the temperature sensor from heating itself up too much, affecting measurements.
+
+	To reverse this, call :py:meth:`wakeup`
+
+	.. py:method:: wakeup()
+
+	Wakes up the LM75, after a call to :py:meth:`shutdown`
+
+	.. py:method:: is_shutdown()
+
+	Returns True if the LM75 sensor is in a shutdown state

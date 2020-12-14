@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lm75 Module &#8212; Christmas Card 2020  documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="WS2812 Module" href="ws2812.html" />
+    <link rel="prev" title="Extra Modules for the Christmas Card" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ws2812.html" title="WS2812 Module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Extra Modules for the Christmas Card"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Christmas Card 2020  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Extra Modules for the Christmas Card</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">lm75 Module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="lm75-module">
+<h1>lm75 Module<a class="headerlink" href="#lm75-module" title="Permalink to this headline">¶</a></h1>
+<p>Handler for LM75 i2c temperature sensor. The LM75 temperature sensor is connected to the I2C bus, and continuously measures temperature, unless it is explicitly shutdown (see <a class="reference internal" href="#lm75.LM75.shutdown" title="lm75.LM75.shutdown"><code class="xref py py-meth docutils literal notranslate"><span class="pre">lm75.LM75.shutdown()</span></code></a>)</p>
+<span class="target" id="module-lm75"></span><dl class="py class">
+<dt id="lm75.LM75">
+<em class="property">class </em><code class="sig-prename descclassname">lm75.</code><code class="sig-name descname">LM75</code><span class="sig-paren">(</span><em class="sig-param">i2c</em><span class="optional">[</span>, <em class="sig-param">address=72</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#lm75.LM75" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs an LM75 object. Takes an I2C object and optionally, an address of the LM75</p>
+<dl class="py method">
+<dt id="lm75.LM75.get_temperature">
+<code class="sig-name descname">get_temperature</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lm75.LM75.get_temperature" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Gets the current temperature, as measured by the LM75 module, in <a class="reference external" href="https://en.wikipedia.org/wiki/Celsius">degrees celsius</a></p>
+<p>Reading while the device is shutdown will result in the last temperature reading captured before the sensor was shutdown.</p>
+<dl class="py method">
+<dt id="lm75.LM75.shutdown">
+<code class="sig-name descname">shutdown</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lm75.LM75.shutdown" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Shuts down the LM75 temperature sensor, reducing current consumption. Also might be useful to prevent the temperature sensor from heating itself up too much, affecting measurements.</p>
+<p>To reverse this, call <a class="reference internal" href="#lm75.LM75.wakeup" title="lm75.LM75.wakeup"><code class="xref py py-meth docutils literal notranslate"><span class="pre">wakeup()</span></code></a></p>
+<dl class="py method">
+<dt id="lm75.LM75.wakeup">
+<code class="sig-name descname">wakeup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lm75.LM75.wakeup" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Wakes up the LM75, after a call to <a class="reference internal" href="#lm75.LM75.shutdown" title="lm75.LM75.shutdown"><code class="xref py py-meth docutils literal notranslate"><span class="pre">shutdown()</span></code></a></p>
+<dl class="py method">
+<dt id="lm75.LM75.is_shutdown">
+<code class="sig-name descname">is_shutdown</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lm75.LM75.is_shutdown" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Returns True if the LM75 sensor is in a shutdown state</p>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Extra Modules for the Christmas Card</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ws2812.html"
+                        title="next chapter">WS2812 Module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/extra/lm75.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ws2812.html" title="WS2812 Module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Extra Modules for the Christmas Card"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Christmas Card 2020  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Extra Modules for the Christmas Card</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">lm75 Module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Michael Cullen.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.3.1.
+    </div>
+  </body>
+</html>
