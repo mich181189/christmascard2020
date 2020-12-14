@@ -39,6 +39,10 @@ templates_path = ['_templates']
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'venv']
 
+# Files that get copied to the output directory
+# Notably we have a .nojekyll file in here to make github pages
+# properly serve this site
+html_extra_path = ['extrafiles']
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -51,3 +55,5 @@ html_theme = 'classic'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+html_baseurl = "https://mich181189.github.io/christmascard2020/"
