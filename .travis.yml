@@ -1,0 +1,20 @@
+# This is to allow travis-ci.com to build and publish the docs
+
+language: python
+python:
+  - "3.8"
+# command to install dependencies
+install:
+  - pip install Sphinx
+# command to run tests
+script:
+  - cd docs && make html
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  keep_history: true
+  local_dir: docs/_build/html
+  on:
+    branch: master
