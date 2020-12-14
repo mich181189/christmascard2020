@@ -1,0 +1,10 @@
+WS2812 Module
+==============
+.. py:module::ws2812
+
+.. py:function:: set_led(led, red, green, blue)
+
+	Sets the colour of the led, identified by index *led* to the colour specified by *red*, *green* and *blue* which are integers from 0 to 255.
+
+	.. note::
+ 		These LEDs are very bright! Values between 0 and 25 are probably easily bright enough! Setting too many LEDs to a high value can cause fairly high current draw, and the PCB can get very hot.
