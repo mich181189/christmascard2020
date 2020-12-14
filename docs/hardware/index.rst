@@ -18,5 +18,5 @@ The microcontroller was chosen as the cheapest one available on `JLCPCB's SMT as
 
 * The Schematic `is available as a PDF </_static/schematic_1_0.pdf>`_ 
 * The hardware design is available on `Github <https://github.com/mich181189/christmascard2020>`_
-  * If you want to play with  the hardware design, it was designed in `KiCad <https://kicad.org/>`_
+    * If you want to play with  the hardware design, it was designed in `KiCad <https://kicad.org/>`_
 * The board runs `Micropython <http://micropython.org/>`_
