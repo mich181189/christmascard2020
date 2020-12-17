@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Board Flashing Script &#8212; Christmas Card 2020  documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="canonical" href="https://mich181189.github.io/christmascard2020/flash_sh.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Extra Micropython Modules for the Christmas Card" href="extra/index.html" />
+    <link rel="prev" title="More Advanced Ideas" href="hardware/advanced.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="extra/index.html" title="Extra Micropython Modules for the Christmas Card"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="hardware/advanced.html" title="More Advanced Ideas"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Christmas Card 2020  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="hardware/index.html" accesskey="U">Christmas Card Hardware / Design Notes</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">My Board Flashing Script</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="my-board-flashing-script">
+<h1>My Board Flashing Script<a class="headerlink" href="#my-board-flashing-script" title="Permalink to this headline">¶</a></h1>
+<p>This is the script I used to flash the board. It was run from ports/stm32 in the Micropython source tree <a class="reference external" href="https://github.com/mich181189/christmascard2020_micropython">(GitHub Link)</a></p>
+<p>It makes use of an initial filesystem I created by copying the files to a board, then dumping the relevant section of flash. I then used the <em>fatlabel</em> utility to relabel it as CCARD2020</p>
+<p>I used an STLink V2 for the flashing.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="n">make</span> <span class="n">BOARD</span><span class="o">=</span><span class="n">CHRISTMAS_CARD2020</span> <span class="n">deploy</span><span class="o">-</span><span class="n">openocd</span>
+<span class="n">openocd</span> <span class="o">-</span><span class="n">f</span> <span class="n">interface</span><span class="o">/</span><span class="n">stlink</span><span class="o">-</span><span class="n">v2</span><span class="o">.</span><span class="n">cfg</span> <span class="o">-</span><span class="n">f</span> <span class="n">target</span><span class="o">/</span><span class="n">stm32f4x_stlink</span><span class="o">.</span><span class="n">cfg</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;init&quot;</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;reset halt&quot;</span>  <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;flash write_image erase init_fs.bin 0x8004000&quot;</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;reset&quot;</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;shutdown&quot;</span>
+</pre></div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="hardware/advanced.html"
+                        title="previous chapter">More Advanced Ideas</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="extra/index.html"
+                        title="next chapter">Extra Micropython Modules for the Christmas Card</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/flash_sh.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="extra/index.html" title="Extra Micropython Modules for the Christmas Card"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="hardware/advanced.html" title="More Advanced Ideas"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Christmas Card 2020  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="hardware/index.html" >Christmas Card Hardware / Design Notes</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">My Board Flashing Script</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Michael Cullen.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.3.1.
+    </div>
+  </body>
+</html>

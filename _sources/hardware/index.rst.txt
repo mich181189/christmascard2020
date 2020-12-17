@@ -5,6 +5,7 @@ Christmas Card Hardware / Design Notes
    :maxdepth: 2
 
    advanced
+   ../flash_sh
 
 .. rubric:: The hardware consists of:
 
@@ -29,3 +30,8 @@ The name label was done with a Brother P-Touch label maker. I had originally int
 * The hardware design is `available on GitHub <https://github.com/mich181189/christmascard2020>`_
     * If you want to play with  the hardware design, it was designed in `KiCad <https://kicad.org/>`_
 * The board runs `Micropython <http://micropython.org/>`_
+* In case you need the firmware for some reason:
+    * `firmware0.bin <../_static/firmware0.bin>`_ (0x08000000)
+    * `firmware1.bin <../_static/firmware1.bin>`_ (0x08020000)
+    * `init_fs.bin <../_static/init_fs.bin>`_ (0x8004000)
+    * :doc:`../flash_sh`
