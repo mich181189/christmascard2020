@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>More Advanced Ideas &#8212; Christmas Card 2020  documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="canonical" href="https://mich181189.github.io/christmascard2020/hardware/advanced.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Extra Micropython Modules for the Christmas Card" href="../extra/index.html" />
+    <link rel="prev" title="Christmas Card Hardware" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../extra/index.html" title="Extra Micropython Modules for the Christmas Card"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Christmas Card Hardware"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Christmas Card 2020  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Christmas Card Hardware</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">More Advanced Ideas</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="more-advanced-ideas">
+<h1>More Advanced Ideas<a class="headerlink" href="#more-advanced-ideas" title="Permalink to this headline">¶</a></h1>
+<p>This page contains some hints/tips/suggestions for things you might want to try if you get bored of the board as is.</p>
+<div class="section" id="connecting-more-leds">
+<h2>Connecting More LEDs<a class="headerlink" href="#connecting-more-leds" title="Permalink to this headline">¶</a></h2>
+<p>There are two test points on the board, TP1 and TP4 that are in the LED chain. <em>TP1</em> is the output of <em>PB0</em> on the microcontroller. This is probbaly of limited use for extension since while you could tap into it, the LEDs would be in parallel with those on the board, which doesn’t sound incredibly useful. <em>TP4</em> however, may be more useful. It is the <em>DOUT</em> pin of the last LED in the chain. This could be connected to a string of WS2812 LEDs. Then, when you init the module, you could specify the extra count</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ws2812</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="mi">28</span><span class="o">+</span><span class="mi">60</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>I really have no idea how many LEDs could be added this way, however the code for driving them uses quite a memory-efficient way of sending the data, so I suspect the number is actually quite high. Memory usage is 3 bytes per LED, plus 48 bytes of scratch space for the actual sending functions.</p>
+</div>
+<div class="section" id="connecting-i2c-peripherals">
+<h2>Connecting I2C Peripherals<a class="headerlink" href="#connecting-i2c-peripherals" title="Permalink to this headline">¶</a></h2>
+<p>There is a pin header on the bottom edge of the board. As well as power and data, this connects to the I2C bus (shared with the LM75 temperature sensor)</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 38%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" colspan="2"><p>Pin  | Function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>+5V</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>+3.3V</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>SCL</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>SDA</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>GND</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The SCL and SDA data lines run at 3.3V. 5V devices can be connected, as long as they do not try to pull these lines to the +5V rail - Since I2C devices should only be pulling the line low, this should not be a problem, except that some (many?) breakout boards contain their own pullup resistors to their power rail.</p>
+</div>
+<p>These devices can then be addressed much like any other device. For example, if you were trying to communicate with the LM75B sensor on the board using raw I2C commands:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">machine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i2c</span> <span class="o">=</span> <span class="n">machine</span><span class="o">.</span><span class="n">I2C</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">400000</span><span class="p">)</span> <span class="c1"># 400KHz I2C bus on channel 1 (the one broken out on the connector)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">i2c</span><span class="o">.</span><span class="n">readfrom_mem</span><span class="p">(</span><span class="mi">72</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># read 2 bytes from register 0 on device with address 72 aka 0x48</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span>
+<span class="go">b&#39;\x17\xa0&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">More Advanced Ideas</a><ul>
+<li><a class="reference internal" href="#connecting-more-leds">Connecting More LEDs</a></li>
+<li><a class="reference internal" href="#connecting-i2c-peripherals">Connecting I2C Peripherals</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Christmas Card Hardware</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../extra/index.html"
+                        title="next chapter">Extra Micropython Modules for the Christmas Card</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/hardware/advanced.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../extra/index.html" title="Extra Micropython Modules for the Christmas Card"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Christmas Card Hardware"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Christmas Card 2020  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Christmas Card Hardware</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">More Advanced Ideas</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Michael Cullen.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.3.1.
+    </div>
+  </body>
+</html>

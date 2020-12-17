@@ -16,8 +16,10 @@ Table Of Contents
 .. toctree::
    :maxdepth: 2
 
+   getting_started
    Hardware <hardware/index>
    extra/index
+   default
 
 
 

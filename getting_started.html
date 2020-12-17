@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Getting Started &#8212; Christmas Card 2020  documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="canonical" href="https://mich181189.github.io/christmascard2020/getting_started.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Christmas Card Hardware" href="hardware/index.html" />
+    <link rel="prev" title="Welcome to the Christmas Card 2020 docs!" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="hardware/index.html" title="Christmas Card Hardware"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to the Christmas Card 2020 docs!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Christmas Card 2020  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Getting Started</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="getting-started">
+<h1><a class="toc-backref" href="#id1">Getting Started</a><a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#getting-started" id="id1">Getting Started</a></p>
+<ul>
+<li><p><a class="reference internal" href="#an-introduction-to-the-hardware" id="id2">An introduction to the Hardware</a></p></li>
+<li><p><a class="reference internal" href="#connecting-to-the-board" id="id3">Connecting to the Board</a></p>
+<ul>
+<li><p><a class="reference internal" href="#storage" id="id4">Storage</a></p></li>
+<li><p><a class="reference internal" href="#serial" id="id5">Serial</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#the-leds" id="id6">The LEDs</a></p></li>
+<li><p><a class="reference internal" href="#taking-the-temperature" id="id7">Taking the Temperature</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="an-introduction-to-the-hardware">
+<h2><a class="toc-backref" href="#id2">An introduction to the Hardware</a><a class="headerlink" href="#an-introduction-to-the-hardware" title="Permalink to this headline">¶</a></h2>
+<p>The christmas card is a <a class="reference external" href="http://micropython.org/">Micropython</a> board, with 28 WS2812 LEDs (sometimes called NeoPixels). It has a USB connector, providing it with 5V power. As supplied, it pulls about 20mA so it can run from a decent power bank for quite a while. This depends very much on the script that’s running though.</p>
+<p>It can be simply used as a christmas decoration, though it can also be a lot more fun than that!</p>
+<p>When plugged into a computer, it appears as both a mass storage device, and a serial port. Together, these allow the pattern to be customised.</p>
+<p>There is also a temperature sensor on the board. Because why not?!</p>
+<p>For more details of the hardware specs, see <a class="reference internal" href="hardware/index.html"><span class="doc">Christmas Card Hardware</span></a></p>
+</div>
+<div class="section" id="connecting-to-the-board">
+<h2><a class="toc-backref" href="#id3">Connecting to the Board</a><a class="headerlink" href="#connecting-to-the-board" title="Permalink to this headline">¶</a></h2>
+<p>Plug one end of a USB cable into the board. Plug the other end into your computer. Yep, thats all there is to it. Now read the next sections for details of what you can do with this!</p>
+<div class="section" id="storage">
+<h3><a class="toc-backref" href="#id4">Storage</a><a class="headerlink" href="#storage" title="Permalink to this headline">¶</a></h3>
+<p>When connected to a computer, it will show up as a storage device. On this storage device you will find a few files:</p>
+<ul class="simple">
+<li><p><strong>boot.py</strong> - this is run at startup, to configure the hardware. It doesn’t contain much, and you can probably ignore it.</p></li>
+<li><p><strong>main.py</strong> - This contains the script that is run when the board is powered up. It is run after boot.py - this is where the patterns are! As supplied, it contains <a class="reference internal" href="default.html"><span class="doc">The Default main.py Script</span></a></p></li>
+<li><p><strong>pybcdc.inf</strong> This file helps Windows to figure out what to do with the board. You can ignore this.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is a very small filesystem, containing only about 64Kb of storage. It should only be used to hold Python scripts you want to run on the board. Try not to write to it more often than you need to since the flash memory on the microcontroller may eventually wear out.</p>
+</div>
+</div>
+<div class="section" id="serial">
+<h3><a class="toc-backref" href="#id5">Serial</a><a class="headerlink" href="#serial" title="Permalink to this headline">¶</a></h3>
+<p>The board shows up as a USB serial device. this runs at a baud rate of <strong>115200</strong></p>
+<p>When you first connect to it, you won’t see much since it’s running the pattern. You can press <strong>Ctrl+C</strong> to interrupt the running script, and get a Micropython prompt. If you want to restart the board from this prompt, you can use press <strong>Ctrl+D</strong></p>
+</div>
+</div>
+<div class="section" id="the-leds">
+<h2><a class="toc-backref" href="#id6">The LEDs</a><a class="headerlink" href="#the-leds" title="Permalink to this headline">¶</a></h2>
+<p>There are 28 WS2812 LEDs on the board. They are digitally controllable, with each taking three values in the range 0-255 - one for each of red, green and blue.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Values above about 30 are <em>very</em> bright, and if enough LEDs are lit at high levels, the board can get very hot quite quickly!</p>
+</div>
+<p>There is a single data connector to each LED, and they are daisy chained together. In effect, they form a shift register. The actual wire protocol has quite exacting timing, since the same line is used for both data and clock. This complexity is taken care of for you by the firmware on the board!</p>
+<p>In order to communicate with the LEDs, we firstly need to tell the firmware how many are connected. Since there are 28 on the board, this is the number we will use:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">ws2812</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ws2812</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="mi">28</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we can set the colours of the LEDs:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ws2812</span><span class="o">.</span><span class="n">set_led</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span><span class="mi">25</span><span class="p">)</span> <span class="c1"># Set LED 4 to R,G,B values 15,20,25</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="taking-the-temperature">
+<h2><a class="toc-backref" href="#id7">Taking the Temperature</a><a class="headerlink" href="#taking-the-temperature" title="Permalink to this headline">¶</a></h2>
+<p>As previously mentioned, there is a temperature sensor on the board. Reading the temperature using it is quite easy:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lm75</span> <span class="kn">import</span> <span class="n">LM75</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">I2C</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i2c</span> <span class="o">=</span> <span class="n">I2C</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># 1 is the hardware ID for the I2C channel the sensor is attached to</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lm75</span> <span class="o">=</span> <span class="n">LM75</span><span class="p">(</span><span class="n">i2c</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lm75</span><span class="o">.</span><span class="n">get_temperature</span><span class="p">()</span>
+<span class="go">24.75</span>
+</pre></div>
+</div>
+<p>Firstly, we import the <a class="reference internal" href="extra/lm75.html#module-lm75" title="lm75"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lm75</span></code></a> module. This is built into the firmware of the board. (If you’re really curious, the source for it can be <a class="reference external" href="https://github.com/mich181189/christmascard2020_micropython/blob/master/drivers/lm75/lm75.py">found on GitHub</a> )
+We then import the I2C module (docs for which can be found on the <a class="reference external" href="http://docs.micropython.org/en/latest/library/machine.I2C.html">Micropython I2C docs page</a>) and set up I2C channel 1 (which is the only one broken out on this board) with a speed of 400kHz.
+We then create an LM75 object, using the i2c object we just created. Then we can query the temperature.</p>
+<p>One thing to keep in mind is that the LM75 sensor is constantly reading the temperature. This actually means it can heat itself up! To avoid this, you can put it into a shutdown mode when you’re not using it, then wake it up when you want to start measuring again. Once you have woken it up, you probably want to give it a few hundred milliseconds to read the temperature again, otherwise you will get the old value from before it was shutdown until it re-measures.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lm75</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lm75</span><span class="o">.</span><span class="n">is_shutdown</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lm75</span><span class="o">.</span><span class="n">wakeup</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lm75</span><span class="o">.</span><span class="n">is_shutdown</span><span class="p">()</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># you can now make your measurement after a short delay</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lm75</span><span class="o">.</span><span class="n">get_temperature</span><span class="p">()</span>
+<span class="go">25.25</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Getting Started</a><ul>
+<li><a class="reference internal" href="#an-introduction-to-the-hardware">An introduction to the Hardware</a></li>
+<li><a class="reference internal" href="#connecting-to-the-board">Connecting to the Board</a><ul>
+<li><a class="reference internal" href="#storage">Storage</a></li>
+<li><a class="reference internal" href="#serial">Serial</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-leds">The LEDs</a></li>
+<li><a class="reference internal" href="#taking-the-temperature">Taking the Temperature</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to the Christmas Card 2020 docs!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="hardware/index.html"
+                        title="next chapter">Christmas Card Hardware</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/getting_started.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="hardware/index.html" title="Christmas Card Hardware"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to the Christmas Card 2020 docs!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Christmas Card 2020  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Getting Started</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Michael Cullen.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.3.1.
+    </div>
+  </body>
+</html>
