@@ -1,5 +1,5 @@
-Christmas Card Hardware
-========================
+Christmas Card Hardware / Design Notes
+======================================
 
 .. toctree::
    :maxdepth: 2
@@ -15,6 +15,10 @@ Christmas Card Hardware
 
 The microcontroller was chosen as the cheapest one available on `JLCPCB's SMT assembly service <https://jlcpcb.com/smt-assembly>`_ with decent Micropython support. This entire project was desgned in a bit of a rush 😅 
 
+The USB connector is a full-sized B connector. This is because it was relatively easy to solder on once I received the PCBs from JLC - I didn't fancy separately reflowing a connector on - if I had more time, I'd have chosen micro-B or maybe even USB-C
+
+The name label was done with a Brother P-Touch label maker. I had originally intended to Sharpie on names, but it started to smudge a bit. I realised I had some 6mm tape for my label maker that worked nicely.
+
 .. image:: /images/christmas-card-render.png
 	:align: center
 	:alt: Render of PCB
@@ -25,4 +29,3 @@ The microcontroller was chosen as the cheapest one available on `JLCPCB's SMT as
 * The hardware design is `available on GitHub <https://github.com/mich181189/christmascard2020>`_
     * If you want to play with  the hardware design, it was designed in `KiCad <https://kicad.org/>`_
 * The board runs `Micropython <http://micropython.org/>`_
-

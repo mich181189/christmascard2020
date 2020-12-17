@@ -17,7 +17,7 @@ Table Of Contents
    :maxdepth: 2
 
    getting_started
-   Hardware <hardware/index>
+   Hardware / Design Notes <hardware/index>
    extra/index
    default
 
