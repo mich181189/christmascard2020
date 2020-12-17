@@ -1,10 +1,15 @@
 Christmas Card Hardware
 ========================
 
+.. toctree::
+   :maxdepth: 2
+
+   advanced
+
 .. rubric:: The hardware consists of:
 
 * STM32F401RET6 Microcontroller
-* 28 WS2812B LEDs
+* 28 WS2812B LEDs (`Datasheet <../_static/WS2812B.pdf>`_)
 * LM75B i2c Temperature Sensor
 * A USB Connector
 
@@ -16,7 +21,8 @@ The microcontroller was chosen as the cheapest one available on `JLCPCB's SMT as
 
 .. rubric:: Some Links
 
-* The Schematic `is available as a PDF </_static/schematic_1_0.pdf>`_ 
-* The hardware design is available on `Github <https://github.com/mich181189/christmascard2020>`_
+* The Schematic `is available as a PDF <../_static/schematic_1_0.pdf>`_ 
+* The hardware design is `available on GitHub <https://github.com/mich181189/christmascard2020>`_
     * If you want to play with  the hardware design, it was designed in `KiCad <https://kicad.org/>`_
 * The board runs `Micropython <http://micropython.org/>`_
+
